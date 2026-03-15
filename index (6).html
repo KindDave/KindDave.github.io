@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Idowu David Awoyemi — Academic Portfolio</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cr:#9E1B32; --cr-dk:#6B1122; --cr-lt:#C8314A; --cr-pale:#F5E8EB;
+    --gold:#C9A84C; --gold-lt:#F0DFA0; --white:#ffffff; --off:#FAFAFA;
+    --border:#D4B8BC; --text-dk:#0D0406; --text-md:#2E0D14; --text-lt:#6B3040;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: Georgia,'Times New Roman',serif; background:var(--off); color:var(--text-dk); min-height:100vh; }
+
+  /* NAV */
+  nav { background:var(--cr-dk); border-bottom:3px solid var(--gold); padding:0 40px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
+  .nav-brand { font-family:Arial,sans-serif; font-size:16px; font-weight:700; color:var(--white); padding:14px 0; letter-spacing:0.3px; }
+  .nav-brand span { color:var(--gold); }
+  .nav-links { display:flex; gap:4px; list-style:none; }
+  .nav-links a { display:block; padding:16px 13px; font-family:Arial,sans-serif; font-size:13px; font-weight:600; color:rgba(255,255,255,0.82); text-decoration:none; letter-spacing:0.3px; transition:color .15s,background .15s; border-bottom:3px solid transparent; }
+  .nav-links a:hover { color:var(--white); background:rgba(255,255,255,0.08); border-bottom-color:var(--gold); }
+
+  /* HERO */
+  .hero-outer { background:var(--cr); border-bottom:4px solid var(--gold); }
+  .hero { max-width:1100px; margin:0 auto; padding:52px 40px 48px; display:flex; align-items:center; justify-content:center; }
+  .hero-text { flex:1; text-align:center; }
+  .hero-name { font-family:Georgia,serif; font-size:34px; font-weight:700; color:var(--white); line-height:1.15; margin-bottom:6px; }
+  .hero-title { font-family:Arial,sans-serif; font-size:15px; color:var(--gold); font-weight:600; margin-bottom:3px; letter-spacing:0.3px; }
+  .hero-inst { font-family:Arial,sans-serif; font-size:13px; color:rgba(255,255,255,0.82); margin-bottom:16px; }
+  .hero-tags { display:flex; flex-wrap:wrap; gap:7px; justify-content:center; }
+  .hero-tag { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.35); color:var(--white); font-family:Arial,sans-serif; font-size:12px; font-weight:600; padding:4px 12px; border-radius:20px; }
+  .hero-contacts { display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; justify-content:center; }
+  .hbtn { font-family:Arial,sans-serif; font-size:13px; font-weight:700; padding:8px 20px; border-radius:6px; text-decoration:none; transition:background .15s; letter-spacing:0.2px; }
+  .hbtn-gold { background:var(--gold); color:var(--cr-dk); }
+  .hbtn-gold:hover { background:var(--gold-lt); }
+  .hbtn-outline { background:transparent; border:2px solid rgba(255,255,255,0.5); color:var(--white); }
+  .hbtn-outline:hover { background:rgba(255,255,255,0.1); border-color:var(--white); }
+
+  /* AWARDS STRIP */
+  .awards-strip { background:var(--gold); border-bottom:2px solid var(--cr-dk); padding:10px 40px; display:flex; gap:24px; align-items:center; flex-wrap:wrap; justify-content:center; }
+  .award-item { font-family:Arial,sans-serif; font-size:12px; font-weight:700; color:var(--cr-dk); display:flex; align-items:center; gap:6px; }
+  .award-item::before { content:"★"; font-size:13px; }
+
+  /* SECTION */
+  .sw { max-width:1100px; margin:0 auto; padding:48px 40px 0; }
+  .sw:last-of-type { padding-bottom:64px; }
+  .sh { display:flex; align-items:center; gap:14px; margin-bottom:24px; }
+  .sh-bar { width:5px; height:32px; background:var(--cr); border-radius:3px; flex-shrink:0; }
+  .sh-title { font-family:Arial,sans-serif; font-size:22px; font-weight:700; color:var(--text-dk); }
+  .sh-title span { font-size:14px; font-weight:400; color:var(--text-lt); margin-left:10px; }
+
+  /* ABOUT */
+  .about-box { background:var(--white); border:1.5px solid var(--border); border-left:5px solid var(--cr); border-radius:10px; padding:24px 28px; font-size:16px; line-height:1.8; color:var(--text-md); }
+  .about-box p+p { margin-top:14px; }
+
+  /* STATS ROW */
+  .stats-row { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; margin-top:20px; }
+  .stat-box { background:var(--cr); border-radius:8px; padding:14px 16px; text-align:center; text-decoration:none; display:block; transition:background 0.18s, transform 0.15s, box-shadow 0.15s; cursor:pointer; }
+  .stat-box:hover { background:var(--cr-dk); transform:translateY(-3px); box-shadow:0 6px 20px rgba(158,27,50,0.25); }
+  .stat-num { font-family:Arial,sans-serif; font-size:26px; font-weight:700; color:var(--white); line-height:1; display:block; }
+  .stat-lbl { font-family:Arial,sans-serif; font-size:11px; color:rgba(255,255,255,0.82); margin-top:4px; display:block; line-height:1.3; }
+
+  /* CARDS */
+  .cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:18px; }
+  .card { background:var(--white); border:1.5px solid var(--border); border-radius:10px; overflow:hidden; display:flex; flex-direction:column; transition:box-shadow .18s,transform .15s; text-decoration:none; color:inherit; }
+  .card:hover { box-shadow:0 6px 24px rgba(158,27,50,0.14); transform:translateY(-2px); }
+  .card-top { background:var(--cr); border-bottom:3px solid var(--gold); padding:14px 18px; display:flex; align-items:center; gap:12px; }
+  .card-icon { width:36px; height:36px; background:rgba(255,255,255,0.18); border:1.5px solid rgba(255,255,255,0.4); border-radius:7px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .card-icon svg { width:18px; height:18px; }
+  .card-label { font-family:Arial,sans-serif; font-size:10px; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.8px; margin-bottom:2px; }
+  .card-title { font-family:Arial,sans-serif; font-size:14px; font-weight:700; color:var(--white); line-height:1.25; }
+  .card-body { padding:15px 18px; flex:1; display:flex; flex-direction:column; }
+  .card-desc { font-size:13px; color:var(--text-md); line-height:1.65; flex:1; font-family:Arial,sans-serif; }
+  .card-footer { margin-top:14px; padding-top:12px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+  .card-tag { background:var(--cr-pale); color:var(--cr-dk); font-family:Arial,sans-serif; font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px; border:1px solid var(--border); }
+  .card-link { font-family:Arial,sans-serif; font-size:13px; font-weight:700; color:var(--cr); text-decoration:none; }
+  .card-link:hover { color:var(--cr-dk); }
+  .card-link::after { content:" →"; }
+
+  /* PUBLICATIONS */
+  .pub-list { display:flex; flex-direction:column; gap:12px; }
+  .pub-item { background:var(--white); border:1.5px solid var(--border); border-left:5px solid var(--cr); border-radius:8px; padding:14px 20px; display:flex; gap:14px; align-items:flex-start; }
+  .pub-year { background:var(--cr); color:var(--white); font-family:Arial,sans-serif; font-size:12px; font-weight:700; padding:4px 10px; border-radius:5px; flex-shrink:0; margin-top:2px; white-space:nowrap; }
+  .pub-title { font-size:14px; font-weight:700; color:var(--text-dk); line-height:1.4; margin-bottom:4px; font-family:Arial,sans-serif; }
+  .pub-meta { font-size:12px; color:var(--text-lt); font-family:Arial,sans-serif; line-height:1.5; }
+  .pub-tags { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
+  .pub-tag { background:var(--cr-pale); color:var(--cr-dk); font-family:Arial,sans-serif; font-size:11px; font-weight:700; padding:2px 9px; border-radius:20px; border:1px solid var(--border); }
+
+  /* CONTACT */
+  .contact-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+  .contact-card { background:var(--white); border:1.5px solid var(--border); border-radius:10px; padding:16px 20px; display:flex; align-items:center; gap:14px; text-decoration:none; color:inherit; transition:box-shadow .15s,border-color .15s; }
+  .contact-card:hover { border-color:var(--cr); box-shadow:0 3px 12px rgba(158,27,50,0.12); }
+  .contact-icon { width:40px; height:40px; background:var(--cr-pale); border:1.5px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .contact-icon svg { width:20px; height:20px; }
+  .contact-label { font-family:Arial,sans-serif; font-size:10px; font-weight:700; color:var(--text-lt); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:3px; }
+  .contact-val { font-family:Arial,sans-serif; font-size:13px; font-weight:600; color:var(--cr); line-height:1.4; }
+
+  /* DIVIDER */
+  .divider { height:1px; background:var(--border); max-width:1100px; margin:48px auto 0; }
+
+  /* TIMELINE */
+  .timeline { display:flex; flex-direction:column; gap:0; position:relative; }
+  .timeline::before { content:''; position:absolute; left:14px; top:16px; bottom:16px; width:2px; background:var(--cr-pale); border-radius:2px; }
+  .tl-item { display:flex; gap:16px; align-items:flex-start; padding-bottom:24px; position:relative; }
+  .tl-dot { width:28px; height:28px; border-radius:50%; background:var(--cr); border:3px solid var(--white); box-shadow:0 0 0 2px var(--cr); flex-shrink:0; margin-top:2px; z-index:1; }
+  .tl-dot-gold { background:var(--gold); box-shadow:0 0 0 2px var(--gold); }
+  .tl-content { flex:1; background:var(--white); border:1.5px solid var(--border); border-radius:10px; padding:14px 18px; }
+  .tl-header { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap; margin-bottom:4px; }
+  .tl-title { font-family:Arial,sans-serif; font-size:15px; font-weight:700; color:var(--text-dk); line-height:1.3; }
+  .tl-date { font-family:Arial,sans-serif; font-size:12px; font-weight:700; color:var(--white); background:var(--cr); padding:3px 10px; border-radius:20px; white-space:nowrap; flex-shrink:0; }
+  .tl-place { font-family:Arial,sans-serif; font-size:13px; font-weight:600; color:var(--cr); margin-bottom:6px; }
+  .tl-desc { font-family:Arial,sans-serif; font-size:13px; color:var(--text-md); line-height:1.65; margin-bottom:8px; }
+  .tl-tags { display:flex; flex-wrap:wrap; gap:6px; }
+  .tl-tag { background:var(--cr-pale); color:var(--cr-dk); font-family:Arial,sans-serif; font-size:11px; font-weight:700; padding:2px 9px; border-radius:20px; border:1px solid var(--border); }
+
+  /* VOLUNTEER CARDS */
+  .vol-card { background:var(--white); border:1.5px solid var(--border); border-left:4px solid var(--cr); border-radius:8px; padding:14px 16px; }
+  .vol-year { font-family:Arial,sans-serif; font-size:11px; font-weight:700; color:var(--text-lt); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px; }
+  .vol-title { font-family:Arial,sans-serif; font-size:14px; font-weight:700; color:var(--text-dk); line-height:1.35; margin-bottom:5px; }
+  .vol-desc { font-family:Arial,sans-serif; font-size:12.5px; color:var(--text-md); line-height:1.6; }
+
+  /* FOOTER */
+  footer { background:var(--cr-dk); border-top:3px solid var(--gold); padding:20px 40px; text-align:center; font-family:Arial,sans-serif; font-size:13px; color:rgba(255,255,255,0.7); margin-top:56px; }
+  footer span { color:var(--gold); }
+
+  @media(max-width:680px){
+    nav { padding:0 16px; } .nav-links { display:none; }
+    .hero { padding:32px 20px; flex-direction:column; gap:20px; } .hero-name { font-size:26px; }
+    .sw { padding:32px 20px 0; } .cards-grid { grid-template-columns:1fr; }
+    .awards-strip { padding:10px 16px; gap:12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Idowu David Awoyemi <span>·</span> Academic Portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+    <li><a href="#volunteering">Service</a></li>
+    <li><a href="#bio">Full Bio</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- AWARDS STRIP -->
+<div class="awards-strip">
+  <div class="award-item">Most Outstanding Graduate Student in Research 2025</div>
+  <div class="award-item">Alabama Power Innovation &amp; Technology Award 2025</div>
+  <div class="award-item">AECT Addie Kinsinger Leadership Award 2024</div>
+  <div class="award-item">Google PhD Fellowship — University Nominee 2025</div>
+</div>
+
+<!-- HERO -->
+<div class="hero-outer">
+  <div class="hero">
+
+    <div class="hero-text">
+      <div class="hero-name">Idowu David Awoyemi</div>
+      <div class="hero-title">Doctoral Candidate (ABD) in Instructional Technology</div>
+      <div class="hero-inst">Department of Educational Leadership, Policy, and Technology Studies &nbsp;·&nbsp; University of Alabama, Tuscaloosa, AL</div>
+      <div class="hero-tags">
+        <span class="hero-tag">Extended Reality (XR)</span>
+        <span class="hero-tag">Immersive Learning</span>
+        <span class="hero-tag">Learning Analytics</span>
+        <span class="hero-tag">AI-Enhanced Education</span>
+        <span class="hero-tag">Adaptive Feedback</span>
+        <span class="hero-tag">Instructional Design</span>
+        <span class="hero-tag">STEM Education</span>
+      </div>
+      <div class="hero-contacts">
+        <a href="/cdn-cgi/l/email-protection#741d1015031b0d11191d3417061d19071b1a5a01155a111001" class="hbtn hbtn-gold">Email Me</a>
+        <a href="CV_Idowu_David_Awoyemi.pdf" download="CV_Idowu_David_Awoyemi.pdf" class="hbtn hbtn-outline">&#8595; Download CV</a>
+        <a href="#publications" class="hbtn hbtn-outline">Publications</a>
+        <a href="#projects" class="hbtn hbtn-outline">My Work</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="sw" id="about">
+  <div class="sh"><div class="sh-bar"></div><div class="sh-title">About</div></div>
+  <div class="about-box">
+    <p>Doctoral candidate (ABD) in Instructional Technology at the University of Alabama. Research focuses on extended reality (XR), AI-enhanced learning, and learning analytics — currently leading a three-article dissertation on AI-powered formative feedback in immersive VR construction safety training. Recognized as Most Outstanding Graduate Student in Research (2025) and <a href="https://www.vanguardngr.com/2023/08/expert-idowu-awoyemi-leads-team-in-revolutionizing-civil-engineering-education-with-vrt/" target="_blank" style="color:var(--cr);font-weight:600;">featured in Vanguard Nigeria</a> for work in VR-based engineering education.</p>
+  </div>
+  <div class="stats-row">
+    <a class="stat-box" href="#publications"><span class="stat-num">13+</span><span class="stat-lbl">Peer-reviewed publications</span></a>
+    <a class="stat-box" href="#publications"><span class="stat-num">26+</span><span class="stat-lbl">Conference presentations</span></a>
+    <a class="stat-box" href="#awards"><span class="stat-num">6+</span><span class="stat-lbl">Active grants &amp; awards</span></a>
+    <a class="stat-box" href="#contact"><span class="stat-num">6</span><span class="stat-lbl">Journal review boards</span></a>
+    <a class="stat-box" href="#about"><span class="stat-num">2027</span><span class="stat-lbl">Expected PhD graduation</span></a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<div class="sw" id="education">
+  <div class="sh"><div class="sh-bar"></div><div class="sh-title">Education</div></div>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <div class="tl-title">Ph.D. in Instructional Technology</div>
+          <div class="tl-date">2023 – Spring 2027 (Expected)</div>
+        </div>
+        <div class="tl-place">University of Alabama, Tuscaloosa, AL</div>
+        <div class="tl-desc">Department of Educational Leadership, Policy, and Technology Studies. Research focus: AI-driven adaptive learning environments, extended reality (XR), learning analytics, and instructional design in complex training contexts.</div>
+        <div class="tl-tags"><span class="tl-tag">ABD</span><span class="tl-tag">Instructional Technology</span><span class="tl-tag">XR &amp; AI</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <div class="tl-title">M.Tech. in Educational Technology</div>
+          <div class="tl-date">2019</div>
+        </div>
+        <div class="tl-place">Federal University of Technology, Minna, Nigeria</div>
+        <div class="tl-desc">Focused on the application of technology in educational settings, virtual classrooms, and digital learning environments.</div>
+        <div class="tl-tags"><span class="tl-tag">Educational Technology</span><span class="tl-tag">Masters</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <div class="tl-title">B.Tech. in Mathematics Education</div>
+          <div class="tl-date">2015</div>
+        </div>
+        <div class="tl-place">Federal University of Technology, Minna, Nigeria</div>
+        <div class="tl-desc">Graduated with distinction. Best student in Mathematics Education (2012). Foundation in mathematics pedagogy, curriculum development, and educational technology integration.</div>
+        <div class="tl-tags"><span class="tl-tag">Mathematics Education</span><span class="tl-tag">Best Student Award</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WORK EXPERIENCE -->
+<div class="sw" id="experience">
+  <div class="sh"><div class="sh-bar"></div><div class="sh-title">Work Experience</div></div>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <div class="tl-title">Research Assistant</div>
+          <div class="tl-date">2023 – Present</div>
+        </div>
+        <div class="tl-place">University of Alabama, Tuscaloosa, AL</div>
+        <div class="tl-desc">Developed an immersive VR intervention for undergraduate engineering students targeting 30% improvement in engagement. Conducted statistical analyses using advanced tools, managed research data, authored manuscripts and proposals, and applied learning analytics to assess educational outcomes.</div>
+        <div class="tl-tags"><span class="tl-tag">IVR</span><span class="tl-tag">Learning Analytics</span><span class="tl-tag">Manuscript Writing</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <div class="tl-title">Teaching Assistant</div>
+          <div class="tl-date">Jan 2025 – May 2025</div>
+        </div>
+        <div class="tl-place">University of Alabama, Tuscaloosa, AL</div>
+        <div class="tl-desc">Led discussion sections in instructional design courses supporting 15+ students. Designed and evaluated assessments, delivered constructive feedback, held office hours, and collaborated with faculty on curriculum development incorporating inclusive teaching practices. Managed the Blackboard LMS.</div>
+        <div class="tl-tags"><span class="tl-tag">Teaching</span><span class="tl-tag">Instructional Design</span><span class="tl-tag">Blackboard LMS</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <div class="tl-title">Instructional Designer</div>
+          <div class="tl-date">Aug 2023 – Dec 2023</div>
+        </div>
+        <div class="tl-place">Office of Teaching Innovation and Digital Education, University of Alabama</div>
+        <div class="tl-desc">Created engaging e-learning content using Articulate Storyline 360. Collaborated with SMEs to translate complex information into accessible learner-friendly formats. Developed expertise in LMS design (Blackboard Learn) and integrated third-party tools to enhance interactivity.</div>
+        <div class="tl-tags"><span class="tl-tag">Articulate Storyline 360</span><span class="tl-tag">eLearning Design</span><span class="tl-tag">LMS</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot tl-dot-gold"></div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <div class="tl-title">Doctoral Researcher — Dissertation in Progress</div>
+          <div class="tl-date">2023 – Present</div>
+        </div>
+        <div class="tl-place">University of Alabama · Chair: Dr. Jewoong Moon</div>
+        <div class="tl-desc">Conducting a three-article dissertation on IVR-supported construction safety training. Study 1 (~50% complete): DDR study developing and usability-testing an IVR prototype on Horizon Worlds/Meta Quest. Study 2 (~50% complete): Microgenetic behavioral analysis using BORIS and think-aloud protocols. Study 3: AI-powered formative feedback (AFF) using CNN on voice, motion, and interaction log data. Timeline: Study 1 completion Q4 2025; Study 2 data collection Q1 2026; Study 3 Q2 2026.</div>
+        <div class="tl-tags"><span class="tl-tag">IVR</span><span class="tl-tag">AI-Powered Feedback</span><span class="tl-tag">Microgenetic Analysis</span><span class="tl-tag">CNN</span><span class="tl-tag">Construction Safety</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <div class="tl-title">Research and Instructional Design Assistant</div>
+          <div class="tl-date">Jan 2016 – Jan 2022</div>
+        </div>
+        <div class="tl-place">Federal University of Technology, Minna, Nigeria</div>
+        <div class="tl-desc">Researched mathematics software applications and virtual classroom effectiveness. Taught research and undergraduate students, assisted with instructional material preparation, facilitated learning strategy training, and collaborated with SMEs on curriculum design using ADDIE and SAM models.</div>
+        <div class="tl-tags"><span class="tl-tag">Curriculum Design</span><span class="tl-tag">ADDIE</span><span class="tl-tag">Mathematics</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <div class="tl-title">Educator and Classroom Instructor</div>
+          <div class="tl-date">Oct 2016 – Dec 2022</div>
+        </div>
+        <div class="tl-place">Model Secondary School, Federal University of Technology, Minna</div>
+        <div class="tl-desc">Tutored high school students in Further Mathematics and Mathematics. Implemented diverse learning strategies, conducted technology projects, organized "Best Brains" tutorials, and served as internal and external examiner. Achieved 100% improvement in student success rates.</div>
+        <div class="tl-tags"><span class="tl-tag">Secondary Education</span><span class="tl-tag">Mathematics</span><span class="tl-tag">Examining</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<div class="sw" id="projects">
+  <div class="sh"><div class="sh-bar"></div><div class="sh-title">Projects &amp; Course Work <span>Click any card to view</span></div></div>
+
+  <!-- Research & Dissertation Projects -->
+  <div style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--cr);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;">Research &amp; Dissertation</div>
+  <div class="cards-grid" style="margin-bottom:28px;">
+
+    <a class="card" href="https://portfolios.davidawoyemi.net/prospectus/" target="_blank">
+      <div class="card-top"><div class="card-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="2" y="1" width="14" height="16" rx="1.5" stroke="white" stroke-width="1.4" fill="none" opacity=".9"/><line x1="5" y1="6" x2="13" y2="6" stroke="white" stroke-width="1.1" opacity=".7"/><line x1="5" y1="9" x2="13" y2="9" stroke="white" stroke-width="1.1" opacity=".6"/><line x1="5" y1="12" x2="9" y2="12" stroke="white" stroke-width="1.1" opacity=".5"/></svg></div>
+        <div><div class="card-label">Dissertation · In Progress</div><div class="card-title">IVR-Supported Construction Safety Training</div></div></div>
+      <div class="card-body"><div class="card-desc">Three-article dissertation: DDR study, microgenetic behavioral analysis, and AI-powered formative feedback (CNN). Chair: Dr. Jewoong Moon. Platform: Horizon Worlds / Meta Quest.</div>
+        <div class="card-footer"><span class="card-tag">Dissertation</span><span class="card-link">View Prospectus</span></div></div>
+    </a>
+
+    <a class="card" href="/pipeline" target="_blank">
+      <div class="card-top"><div class="card-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="1" y="4" width="4" height="10" rx="1" fill="white" opacity=".9"/><rect x="7" y="6" width="4" height="8" rx="1" fill="white" opacity=".7"/><rect x="13" y="2" width="4" height="12" rx="1" fill="white" opacity=".5"/></svg></div>
+        <div><div class="card-label">Interactive Visualization</div><div class="card-title">Six-Stage Analytic Pipeline</div></div></div>
+      <div class="card-body"><div class="card-desc">Interactive stepper through the behavioral-mining methodology from the AERA 2025 VR training study — coding, transition matrices, entropy curves, K-Means clustering, and cluster dynamics.</div>
+        <div class="card-footer"><span class="card-tag">AERA 2025</span><span class="card-link">Explore</span></div></div>
+    </a>
+
+    <a class="card" href="/aera-2025" target="_blank">
+      <div class="card-top"><div class="card-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="16" height="16" rx="2" stroke="white" stroke-width="1.4" fill="none" opacity=".9"/><line x1="1" y1="6" x2="17" y2="6" stroke="white" stroke-width="1.2" opacity=".7"/><rect x="3" y="9" width="5" height="5" rx="1" fill="white" opacity=".6"/></svg></div>
+        <div><div class="card-label">Conference Poster · AERA 2025</div><div class="card-title">Feedback-Driven Strategic Shifts in IVR Training</div></div></div>
+      <div class="card-body"><div class="card-desc">Accepted poster on behavioral-mining and adaptive feedback in immersive VR heat-stress safety training. Includes all figures, findings, learner cluster profiles, and theoretical framework.</div>
+        <div class="card-footer"><span class="card-tag">SIG-IT · Poster #39</span><span class="card-link">View</span></div></div>
+    </a>
+
+    <a class="card" href="https://sites.ua.edu/adielab/people/" target="_blank">
+      <div class="card-top"><div class="card-icon"><svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="white" stroke-width="1.4" fill="none" opacity=".9"/><line x1="9" y1="5" x2="9" y2="9" stroke="white" stroke-width="1.4" stroke-linecap="round"/><line x1="9" y1="9" x2="12" y2="12" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+        <div><div class="card-label">Research Lab</div><div class="card-title">ADIE Lab — Adaptive Design of Immersive e-Learning</div></div></div>
+      <div class="card-body"><div class="card-desc">Lab Manager for the ADIE Lab at the University of Alabama. Research on IVR, AI-enhanced learning, XR technologies, and learning analytics in engineering and STEM education contexts.</div>
+        <div class="card-footer"><span class="card-tag">Lab Manager</span><span class="card-link">Visit Lab</span></div></div>
+    </a>
+
+  </div>
+
+  <!-- Doctoral Course Portfolios -->
+  <div style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--cr);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;">Doctoral Course Portfolios</div>
+  <div class="cards-grid" style="margin-bottom:28px;">
+
+    <a class="card" href="ail601.html" target="_blank">
+      <div class="card-top"><div class="card-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="2" y="1" width="14" height="16" rx="1.5" stroke="white" stroke-width="1.4" fill="none" opacity=".9"/><line x1="5" y1="6" x2="13" y2="6" stroke="white" stroke-width="1" opacity=".7"/><line x1="5" y1="9" x2="13" y2="9" stroke="white" stroke-width="1" opacity=".6"/><line x1="5" y1="12" x2="10" y2="12" stroke="white" stroke-width="1" opacity=".5"/></svg></div>
+        <div><div class="card-label">AIL-601 · Fall 2023</div><div class="card-title">Principles of Instructional Technology</div></div></div>
+      <div class="card-body"><div class="card-desc">Foundational IT course covering motivational theories, historical development, UDL, RefWorks, Adobe Express, and professional community engagement. Instructor: Dr. Angela Benson.</div>
+        <div class="card-footer"><span class="card-tag">Foundations</span><span class="card-link">View</span></div></div>
+    </a>
+
+    <a class="card" href="ail602.html" target="_blank">
+      <div class="card-top"><div class="card-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="2" y="1" width="14" height="16" rx="1.5" stroke="white" stroke-width="1.4" fill="none" opacity=".9"/><line x1="5" y1="6" x2="13" y2="6" stroke="white" stroke-width="1" opacity=".7"/><line x1="5" y1="9" x2="13" y2="9" stroke="white" stroke-width="1" opacity=".6"/><line x1="5" y1="12" x2="10" y2="12" stroke="white" stroke-width="1" opacity=".5"/></svg></div>
+        <div><div class="card-label">AIL-602 · Spring 2023</div><div class="card-title">Foundations of Instructional Design</div></div></div>
+      <div class="card-body"><div class="card-desc">Instructional design principles, Gagné's Nine Events, TEC-VARIETY framework, alignment mapping, and application to IVR training design for civil engineering students. Instructor: Dr. Feiya Luo.</div>
+        <div class="card-footer"><span class="card-tag">ADDIE · Gagné</span><span class="card-link">View</span></div></div>
+    </a>
+
+    <a class="card" href="ail604.html" target="_blank">
+      <div class="card-top"><div class="card-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="2" y="1" width="14" height="16" rx="1.5" stroke="white" stroke-width="1.4" fill="none" opacity=".9"/><line x1="5" y1="6" x2="13" y2="6" stroke="white" stroke-width="1" opacity=".7"/><line x1="5" y1="9" x2="13" y2="9" stroke="white" stroke-width="1" opacity=".6"/><line x1="5" y1="12" x2="10" y2="12" stroke="white" stroke-width="1" opacity=".5"/></svg></div>
+        <div><div class="card-label">AIL-604 · Fall 2024</div><div class="card-title">Distance Learning Technologies</div></div></div>
+      <div class="card-body"><div class="card-desc">Distance learning design, Canvas LMS course prototype, VR as distance learning tool infographic, backward design, multimedia learning theory, and narrated video production. Instructor: Dr. Margaret Rice.</div>
+        <div class="card-footer"><span class="card-tag">Canvas · UDL</span><span class="card-link">View</span></div></div>
+    </a>
+
+    <a class="card" href="ail605.html" target="_blank">
+      <div class="card-top"><div class="card-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="2" y="1" width="14" height="16" rx="1.5" stroke="white" stroke-width="1.4" fill="none" opacity=".9"/><line x1="5" y1="6" x2="13" y2="6" stroke="white" stroke-width="1" opacity=".7"/><line x1="5" y1="9" x2="13" y2="9" stroke="white" stroke-width="1" opacity=".6"/><line x1="5" y1="12" x2="10" y2="12" stroke="white" stroke-width="1" opacity=".5"/></svg></div>
+        <div><div class="card-label">AIL-605 · Spring 2023</div><div class="card-title">Interactive Multimedia Processes</div></div></div>
+      <div class="card-body"><div class="card-desc">Interactive multimedia design using Rise Articulate Storyline 360. Capstone: self-paced tutorial on 2D geometric shapes with branching navigation, audio narration, and embedded media.</div>
+        <div class="card-footer"><span class="card-tag">Articulate Rise 360</span><span class="card-link">View</span></div></div>
+    </a>
+
+    <a class="card" href="ail608.html" target="_blank">
+      <div class="card-top"><div class="card-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="2" y="1" width="14" height="16" rx="1.5" stroke="white" stroke-width="1.4" fill="none" opacity=".9"/><line x1="5" y1="6" x2="13" y2="6" stroke="white" stroke-width="1" opacity=".7"/><line x1="5" y1="9" x2="13" y2="9" stroke="white" stroke-width="1" opacity=".6"/><line x1="5" y1="12" x2="10" y2="12" stroke="white" stroke-width="1" opacity=".5"/></svg></div>
+        <div><div class="card-label">AIL-608 · Fall 2024</div><div class="card-title">Accessibility in Instructional Technology</div></div></div>
+      <div class="card-body"><div class="card-desc">WCAG accessibility auditing of Adobe Express, Accessibility Resources Portfolio on Google Sites, inclusive design principles, and UDL implementation. Instructor: Dr. Feiya Luo.</div>
+        <div class="card-footer"><span class="card-tag">WCAG · UDL</span><span class="card-link">View</span></div></div>
+    </a>
+
+    <a class="card" href="ail690.html" target="_blank">
+      <div class="card-top"><div class="card-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="2" y="1" width="14" height="16" rx="1.5" stroke="white" stroke-width="1.4" fill="none" opacity=".9"/><line x1="5" y1="6" x2="13" y2="6" stroke="white" stroke-width="1" opacity=".7"/><line x1="5" y1="9" x2="13" y2="9" stroke="white" stroke-width="1" opacity=".6"/><line x1="5" y1="12" x2="10" y2="12" stroke="white" stroke-width="1" opacity=".5"/></svg></div>
+        <div><div class="card-label">AIL-690 · Fall 2023</div><div class="card-title">Emerging Technologies in Education</div></div></div>
+      <div class="card-body"><div class="card-desc">Exploration of emerging technologies, ethical considerations in EdTech, VR research infographic, graphic design analysis, and self-running oral presentation. Instructor: Dr. Margaret Rice.</div>
+        <div class="card-footer"><span class="card-tag">Emerging Tech · Ethics</span><span class="card-link">View</span></div></div>
+    </a>
+
+    <a class="card" href="ail689.html" target="_blank">
+      <div class="card-top"><div class="card-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="2" y="1" width="14" height="16" rx="1.5" stroke="white" stroke-width="1.4" fill="none" opacity=".9"/><line x1="5" y1="6" x2="13" y2="6" stroke="white" stroke-width="1" opacity=".7"/><line x1="5" y1="9" x2="13" y2="9" stroke="white" stroke-width="1" opacity=".6"/><line x1="5" y1="12" x2="10" y2="12" stroke="white" stroke-width="1" opacity=".5"/></svg></div>
+        <div><div class="card-label">AIL-689 · Spring 2025</div><div class="card-title">Practicum in Instructional Technology</div></div></div>
+      <div class="card-body"><div class="card-desc">Dissertation prospectus development, comprehensive exam portfolio website, scholarly identity formation, and professional documentation. Instructor: Dr. Jewoong Moon.</div>
+        <div class="card-footer"><span class="card-tag">Dissertation Prep</span><span class="card-link">View</span></div></div>
+    </a>
+
+  </div>
+
+  <!-- Other Resources -->
+  <div style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--cr);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;">Portfolio &amp; Resources</div>
+  <div class="cards-grid">
+
+    <a class="card" href="https://portfolios.davidawoyemi.net/" target="_blank">
+      <div class="card-top"><div class="card-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="2" y="5" width="14" height="11" rx="1.5" stroke="white" stroke-width="1.4" fill="none" opacity=".9"/><path d="M6 5V4a3 3 0 016 0v1" stroke="white" stroke-width="1.4" opacity=".7"/><circle cx="9" cy="10" r="1.5" fill="white" opacity=".8"/></svg></div>
+        <div><div class="card-label">Doctoral Portfolio</div><div class="card-title">IT Program Comprehensive Exam Portfolio</div></div></div>
+      <div class="card-body"><div class="card-desc">Full doctoral portfolio including Philosophy Statement, IT Program Reflection, all course reflections (AIL-601 to AIL-689), and dissertation prospectus.</div>
+        <div class="card-footer"><span class="card-tag">Doctoral Portfolio</span><span class="card-link">Visit</span></div></div>
+    </a>
+
+    <a class="card" href="https://sites.google.com/view/david-teaching-dossier/home" target="_blank">
+      <div class="card-top"><div class="card-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="1" y="2" width="16" height="14" rx="1.5" stroke="white" stroke-width="1.4" fill="none" opacity=".9"/><line x1="1" y1="6" x2="17" y2="6" stroke="white" stroke-width="1.2" opacity=".7"/><line x1="5" y1="10" x2="9" y2="10" stroke="white" stroke-width="1.1" opacity=".6"/><line x1="5" y1="12.5" x2="11" y2="12.5" stroke="white" stroke-width="1.1" opacity=".5"/></svg></div>
+        <div><div class="card-label">Teaching</div><div class="card-title">Teaching Dossier</div></div></div>
+      <div class="card-body"><div class="card-desc">Comprehensive teaching dossier documenting philosophy, instructional strategies, course design, student feedback, and evidence of teaching effectiveness.</div>
+        <div class="card-footer"><span class="card-tag">Teaching Dossier</span><span class="card-link">Explore</span></div></div>
+    </a>
+
+    <a class="card" href="https://idawoyemi.myportfolio.com/work" target="_blank">
+      <div class="card-top"><div class="card-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="1" y="3" width="10" height="12" rx="1.5" stroke="white" stroke-width="1.4" fill="none" opacity=".9"/><rect x="7" y="5" width="10" height="10" rx="1.5" stroke="white" stroke-width="1.4" fill="none" opacity=".6"/></svg></div>
+        <div><div class="card-label">Design Projects</div><div class="card-title">Selected Instructional Design Projects</div></div></div>
+      <div class="card-body"><div class="card-desc">Curated instructional design and development projects including e-learning modules, interactive content, VR-based training designs, and multimedia learning artifacts.</div>
+        <div class="card-footer"><span class="card-tag">Design Portfolio</span><span class="card-link">View work</span></div></div>
+    </a>
+
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- SELECTED PUBLICATIONS -->
+<div class="sw" id="publications">
+  <div class="sh"><div class="sh-bar"></div><div class="sh-title">Selected Publications <span>Showing recent &amp; representative works</span></div></div>
+  <div class="pub-list">
+
+    <div class="pub-item">
+      <span class="pub-year">2025</span>
+      <div>
+        <div class="pub-title">Feedback-Driven Strategic Shifts in Immersive Virtual Reality Training: A Multi-Phase Behavioral-Mining Study</div>
+        <div class="pub-meta">Awoyemi, I. D., Moon, J., Abu, S., Marchiori, R., &amp; Song, S. <em>AERA Annual Meeting 2025</em>, SIG-IT, Poster #39. Los Angeles, CA.</div>
+        <div class="pub-tags"><span class="pub-tag">Conference</span><span class="pub-tag">IVR</span><span class="pub-tag">Learning Analytics</span><span class="pub-tag">SRL</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-year">2025</span>
+      <div>
+        <div class="pub-title">Generative AI-Enhanced Virtual Reality Simulation for Pre-Service Teacher Education: A Mixed-Methods Analysis</div>
+        <div class="pub-meta">Hong, S., Moon, J., Eom, T., Awoyemi, I. D., &amp; Hwang, J. <em>Education Sciences, 15</em>(8), 997. https://doi.org/10.3390/educsci15080997</div>
+        <div class="pub-tags"><span class="pub-tag">Journal</span><span class="pub-tag">Generative AI</span><span class="pub-tag">VR</span><span class="pub-tag">Teacher Education</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-year">2025</span>
+      <div>
+        <div class="pub-title">A Systematic Review of Technology-Enhanced Learning Approaches to Foster Construction Engineering and Management Competencies</div>
+        <div class="pub-meta">Marchiori, R., Song, S., Moon, J., Awoyemi, D., et al. <em>Computer Applications in Engineering Education, 33</em>(5), e70074. https://doi.org/10.1002/cae.70074</div>
+        <div class="pub-tags"><span class="pub-tag">Journal</span><span class="pub-tag">Systematic Review</span><span class="pub-tag">Engineering Education</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-year">2025</span>
+      <div>
+        <div class="pub-title">Broadening Participation in Computing Through Cultivating Teacher Professional Growth: Stories from Teachers of Color</div>
+        <div class="pub-meta">Luo, F., Nasrin, F., &amp; Awoyemi, I. D. <em>Education Sciences, 15</em>(7), 848. https://doi.org/10.3390/educsci15070848</div>
+        <div class="pub-tags"><span class="pub-tag">Journal</span><span class="pub-tag">Equity</span><span class="pub-tag">Computing</span><span class="pub-tag">Teacher PD</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-year">2024</span>
+      <div>
+        <div class="pub-title">A Narrative Review on Immersive Virtual Reality in Enhancing High School Students' Mathematics Competence: From TPACK Perspective</div>
+        <div class="pub-meta">Awoyemi, I. D., Feliza Marie S. M., &amp; Moon, J. <em>Journal of Korean Society of Mathematical Education Series A, 63</em>(2), 295–318. https://doi.org/10.7468/mathedu.2024.63.2.295</div>
+        <div class="pub-tags"><span class="pub-tag">Journal</span><span class="pub-tag">IVR</span><span class="pub-tag">Mathematics</span><span class="pub-tag">TPACK</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-year">Accepted</span>
+      <div>
+        <div class="pub-title">Decoding Learning States in VR Safety Training: A Bayesian Cognitive Diagnostic Approach to Microgenetic Behavioral Analytics</div>
+        <div class="pub-meta">Moon J., Awoyemi I. D., &amp; Abu S. <em>Behaviourmetrika</em> (Accepted).</div>
+        <div class="pub-tags"><span class="pub-tag">Journal</span><span class="pub-tag">Bayesian</span><span class="pub-tag">VR Safety</span><span class="pub-tag">Behavioral Analytics</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-year">2026</span>
+      <div>
+        <div class="pub-title">Game-Based Learning for Social Changes</div>
+        <div class="pub-meta">Abu, S., Ghooreian, A., Ogunniran, M., Awoyemi, I. D., Moon, J. In Trifonas, P. (Eds.), <em>International Handbook of Theory and Research in Digital Media and Education.</em> Springer (In Press).</div>
+        <div class="pub-tags"><span class="pub-tag">Book Chapter</span><span class="pub-tag">Game-Based Learning</span><span class="pub-tag">Springer</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- AWARDS -->
+<div class="sw" id="awards">
+  <div class="sh"><div class="sh-bar"></div><div class="sh-title">Awards &amp; Scholarships</div></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;">
+
+    <div style="background:var(--white);border:1.5px solid var(--border);border-left:5px solid var(--gold);border-radius:8px;padding:14px 18px;">
+      <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--text-lt);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">2025</div>
+      <div style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:var(--text-dk);">Most Outstanding Graduate Student in Research</div>
+      <div style="font-family:Arial,sans-serif;font-size:12px;color:var(--text-lt);margin-top:2px;">Instructional Technology, University of Alabama</div>
+    </div>
+
+    <div style="background:var(--white);border:1.5px solid var(--border);border-left:5px solid var(--gold);border-radius:8px;padding:14px 18px;">
+      <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--text-lt);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">2025</div>
+      <div style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:var(--text-dk);">Alabama Power Innovation &amp; Technology Award</div>
+      <div style="font-family:Arial,sans-serif;font-size:12px;color:var(--text-lt);margin-top:2px;">$3,000 · University of Alabama</div>
+    </div>
+
+    <div style="background:var(--white);border:1.5px solid var(--border);border-left:5px solid var(--gold);border-radius:8px;padding:14px 18px;">
+      <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--text-lt);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">2025</div>
+      <div style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:var(--text-dk);">Google PhD Fellowship — University Nominee</div>
+      <div style="font-family:Arial,sans-serif;font-size:12px;color:var(--text-lt);margin-top:2px;">Nominated by University of Alabama</div>
+    </div>
+
+    <div style="background:var(--white);border:1.5px solid var(--border);border-left:5px solid var(--gold);border-radius:8px;padding:14px 18px;">
+      <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--text-lt);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">2025</div>
+      <div style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:var(--text-dk);">McJulien Graduate Student Scholarship</div>
+      <div style="font-family:Arial,sans-serif;font-size:12px;color:var(--text-lt);margin-top:2px;">$500 · University of Alabama</div>
+    </div>
+
+    <div style="background:var(--white);border:1.5px solid var(--border);border-left:5px solid var(--cr);border-radius:8px;padding:14px 18px;">
+      <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--text-lt);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">2024</div>
+      <div style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:var(--text-dk);">AECT Addie Kinsinger Leadership Development Internship Award</div>
+      <div style="font-family:Arial,sans-serif;font-size:12px;color:var(--text-lt);margin-top:2px;">$1,000 · AECT</div>
+    </div>
+
+    <div style="background:var(--white);border:1.5px solid var(--border);border-left:5px solid var(--cr);border-radius:8px;padding:14px 18px;">
+      <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--text-lt);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">2024</div>
+      <div style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:var(--text-dk);">College of Education Research Assistant Award</div>
+      <div style="font-family:Arial,sans-serif;font-size:12px;color:var(--text-lt);margin-top:2px;">$4,500 · University of Alabama</div>
+    </div>
+
+    <div style="background:var(--white);border:1.5px solid var(--border);border-left:5px solid var(--cr);border-radius:8px;padding:14px 18px;">
+      <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--text-lt);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">2023</div>
+      <div style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:var(--text-dk);">Outstanding Practitioner Paper Award</div>
+      <div style="font-family:Arial,sans-serif;font-size:12px;color:var(--text-lt);margin-top:2px;">Immersive Learning Research Network (iLRN)</div>
+    </div>
+
+    <div style="background:var(--white);border:1.5px solid var(--border);border-left:5px solid var(--cr);border-radius:8px;padding:14px 18px;">
+      <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--text-lt);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">2024</div>
+      <div style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:var(--text-dk);">William W. Taube Doctoral Scholarship</div>
+      <div style="font-family:Arial,sans-serif;font-size:12px;color:var(--text-lt);margin-top:2px;">$1,000 · University of Alabama</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- LEADERSHIP -->
+<div class="sw" id="leadership">
+  <div class="sh"><div class="sh-bar"></div><div class="sh-title">Leadership &amp; Service Roles</div></div>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot tl-dot-gold"></div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <div class="tl-title">Lab Manager — Adaptive Design of Immersive e-Learning (ADIE) Lab</div>
+          <div class="tl-date">Jan 2023 – Present</div>
+        </div>
+        <div class="tl-place">University of Alabama, Tuscaloosa, AL</div>
+        <div class="tl-desc">Orchestrated multiple research projects in immersive learning environments, led a multidisciplinary team of researchers, managed timelines and budgets, and cultivated partnerships with external research groups to drive innovation in immersive learning.</div>
+        <div class="tl-tags"><span class="tl-tag">Lab Management</span><span class="tl-tag">Research Leadership</span><span class="tl-tag">Team Mentorship</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot tl-dot-gold"></div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <div class="tl-title">Senator — Student Government Association</div>
+          <div class="tl-date">Apr 2024 – May 2025</div>
+        </div>
+        <div class="tl-place">University of Alabama</div>
+        <div class="tl-desc">Advocated for graduate student interests, authored and co-sponsored legislation to improve campus policies and inclusivity, organized campus-wide initiatives, and served as liaison between student government, faculty, and administration.</div>
+        <div class="tl-tags"><span class="tl-tag">Student Governance</span><span class="tl-tag">Policy</span><span class="tl-tag">Advocacy</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot tl-dot-gold"></div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <div class="tl-title">Vice President — Deeper Life Campus Fellowship</div>
+          <div class="tl-date">2025 – Present</div>
+        </div>
+        <div class="tl-place">University of Alabama</div>
+        <div class="tl-desc">Assisted in overseeing spiritual, administrative, and outreach activities. Coordinated weekly meetings, Bible studies, and campus evangelism. Mentored executive members and represented the fellowship in university faith-based councils.</div>
+        <div class="tl-tags"><span class="tl-tag">Leadership</span><span class="tl-tag">Mentoring</span><span class="tl-tag">Community Building</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot tl-dot-gold"></div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <div class="tl-title">Graduate Student Ambassador</div>
+          <div class="tl-date">Mar 2023 – Jul 2025</div>
+        </div>
+        <div class="tl-place">University of Alabama</div>
+        <div class="tl-desc">Provided support and guidance to new and prospective graduate students, relayed important institutional updates, and served as a representative of the graduate student community.</div>
+        <div class="tl-tags"><span class="tl-tag">Student Support</span><span class="tl-tag">Outreach</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot tl-dot-gold"></div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <div class="tl-title">Conference Chair &amp; Discussant</div>
+          <div class="tl-date">2025 – 2026</div>
+        </div>
+        <div class="tl-place">AERA Annual Meeting &amp; AECT Convention</div>
+        <div class="tl-desc">Chair for two AERA 2026 sessions: "AI-Enhanced Student Learning Outcomes" and "AI-Mediated Learning Environments: Scaffolding Inquiry, Metacognition, and Engagement." Discussant at AECT 2025 Convention.</div>
+        <div class="tl-tags"><span class="tl-tag">AERA 2026</span><span class="tl-tag">AECT 2025</span><span class="tl-tag">Conference Chair</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- VOLUNTEERING & COMMUNITY SERVICE -->
+<div class="sw" id="volunteering">
+  <div class="sh"><div class="sh-bar"></div><div class="sh-title">Volunteering &amp; Community Service</div></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;">
+
+    <div class="vol-card">
+      <div class="vol-year">2023–2024</div>
+      <div class="vol-title">Als Pals &amp; Reading Allies Mentorship</div>
+      <div class="vol-desc">Mentored students through the Als Pals and Reading Allies programs at the University of Alabama.</div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-year">2023–2024</div>
+      <div class="vol-title">Tide Together Graduate Peer Mentoring</div>
+      <div class="vol-desc">Mentored graduate students through the Tide Together Mentoring Program, supporting academic and professional development.</div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-year">2023–2024</div>
+      <div class="vol-title">Tuscaloosa City School District — Teacher Professional Development</div>
+      <div class="vol-desc">Joined the team providing professional development programs for Skyland Elementary teachers, supporting technology integration in classrooms.</div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-year">2023–2025</div>
+      <div class="vol-title">Tuscaloosa International Friends</div>
+      <div class="vol-desc">Aided new international students settling in Tuscaloosa, providing guidance and community support.</div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-year">2024–2025</div>
+      <div class="vol-title">UA Undergraduate Research Competition Judge</div>
+      <div class="vol-desc">Served as a judge for the University of Alabama campus-wide undergraduate presentation competition.</div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-year">2023</div>
+      <div class="vol-title">Graduate Student Orientation Seminar Speaker</div>
+      <div class="vol-desc">Delivered a seminar to new graduate students during the University of Alabama graduate student orientation event.</div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-year">2023</div>
+      <div class="vol-title">AECT Convention Volunteer</div>
+      <div class="vol-desc">Volunteered at the AECT Convention supporting conference operations and attendee engagement.</div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-year">2023</div>
+      <div class="vol-title">Engage Alabama — Camden</div>
+      <div class="vol-desc">Volunteered with Engage Alabama to provide community outreach and service in Camden, AL.</div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-year">2023–Present</div>
+      <div class="vol-title">Africa Student Association — Welfare Committee</div>
+      <div class="vol-desc">Served as a member of the Welfare Committee supporting African students at the University of Alabama.</div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-year">2024</div>
+      <div class="vol-title">UA Get on Board Day</div>
+      <div class="vol-desc">Volunteered at the University of Alabama Get on Board Day, connecting students with campus organizations.</div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-year">2023–2024</div>
+      <div class="vol-title">GROW &amp; Graduate School Programs</div>
+      <div class="vol-desc">Volunteered in graduate school programs including GROW and other events supporting graduate student success.</div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-year">2025–2026</div>
+      <div class="vol-title">Journal Reviewer — 6 Journals</div>
+      <div class="vol-desc">Active reviewer for: Journal of Computer-Assisted Learning, Behaviour &amp; Information Technology, Computer &amp; Education: X Reality, Journal of Education &amp; Information Technologies, Teaching Repository AI-Infused Learning, and Asian Journal of Education &amp; Social Studies.</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FULL BIO -->
+<div class="sw" id="bio">
+  <div class="sh"><div class="sh-bar"></div><div class="sh-title">Full Bio</div></div>
+  <div class="about-box">
+    <p>Idowu David Awoyemi (preferred: David) is a doctoral candidate (ABD) in Instructional Technology in the Department of Educational Leadership, Policy, and Technology Studies at the University of Alabama. His research focuses on the design and application of emerging technologies — particularly extended reality (XR), immersive environments, and artificial intelligence (AI) — to develop adaptive and effective learning solutions for complex educational and training contexts.</p>
+    <p>His scholarly interests include AI-powered adaptive learning environments, the pedagogical integration of XR technologies, learning analytics, and innovative approaches to instructional design. He serves as Lab Manager for the Adaptive Design of Immersive e-Learning (ADIE) Lab and has collaborated with faculty on numerous research projects and conference presentations, earning recognition including the Most Outstanding Graduate Student in Research Award (2025), the Alabama Power Innovation and Technology Award (2025), and a Google PhD Fellowship University Nomination (2025).</p>
+    <p>His dissertation, titled <em>"Development of Evidence-Based Immersive Virtual Reality-Supported Construction Safety Engineering Training,"</em> is supervised by Dr. Jewoong Moon (Chair). The three-article dissertation addresses construction safety education through: (1) a Design and Development Research study creating and usability-testing an IVR prototype on Horizon Worlds using Meta Quest headsets; (2) a microgenetic behavioral analysis examining moment-to-moment student learning processes using think-aloud protocols and sequential pattern mining; and (3) development and validation of an AI-powered formative feedback (AFF) framework using a Convolutional Neural Network that processes voice inputs, motion data, and interaction logs to automatically generate post-session diagnostic feedback. He was recognized as an Outstanding Student during both his undergraduate and graduate studies in Nigeria, and has been <a href="https://www.vanguardngr.com/2023/08/expert-idowu-awoyemi-leads-team-in-revolutionizing-civil-engineering-education-with-vrt/" target="_blank" style="color:var(--cr);font-weight:600;">featured in Vanguard Nigeria</a> for his work revolutionizing civil engineering education with VR technology.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<div class="sw" id="contact">
+  <div class="sh"><div class="sh-bar"></div><div class="sh-title">Contact</div></div>
+  <div class="contact-grid">
+
+    <a class="contact-card" href="/cdn-cgi/l/email-protection#335a5752445c4a565e5a7350415a5e405c5d1d46521d565746">
+      <div class="contact-icon"><svg viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2" stroke="#9E1B32" stroke-width="1.5" fill="none"/><path d="M2 6l8 6 8-6" stroke="#9E1B32" stroke-width="1.5" fill="none"/></svg></div>
+      <div><div class="contact-label">Email</div><div class="contact-val"><span class="__cf_email__" data-cfemail="335a5752445c4a565e5a7350415a5e405c5d1d46521d565746">[email&#160;protected]</span></div></div>
+    </a>
+
+    <div class="contact-card">
+      <div class="contact-icon"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="#9E1B32" stroke-width="1.5" fill="none"/><circle cx="10" cy="7" r="2" stroke="#9E1B32" stroke-width="1.2" fill="none"/></svg></div>
+      <div><div class="contact-label">Office</div><div class="contact-val">324 Autherine Lucy Hall, Box 870302<br><span style="font-size:12px;color:var(--text-lt);font-weight:400;">Tuscaloosa, AL 35487 · University of Alabama</span></div></div>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon"><svg viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="16" height="16" rx="3" stroke="#9E1B32" stroke-width="1.5" fill="none"/><circle cx="6.5" cy="7" r="1.2" fill="#9E1B32"/><line x1="6.5" y1="9.5" x2="6.5" y2="14" stroke="#9E1B32" stroke-width="1.5" stroke-linecap="round"/><path d="M9.5 9.5v4.5M9.5 11.5c0-1.1.9-2 2-2s2 .9 2 2v2.5" stroke="#9E1B32" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div><div class="contact-label">ADIE Lab</div><div class="contact-val">sites.ua.edu/adielab/people</div></div>
+    </div>
+
+    <a class="contact-card" href="https://scholar.google.com/citations?user=NIWz8s4AAAAJ&hl=en" target="_blank">
+      <div class="contact-icon"><svg viewBox="0 0 20 20" fill="none"><path d="M10 3L2 7l8 4 8-4-8-4z" stroke="#9E1B32" stroke-width="1.5" fill="none" stroke-linejoin="round"/><path d="M5 9v4c0 2 2.5 4 5 4s5-2 5-4V9" stroke="#9E1B32" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+      <div><div class="contact-label">Google Scholar</div><div class="contact-val">scholar.google.com/NIWz8s4AAAAJ</div></div>
+    </a>
+
+    <div class="contact-card">
+      <div class="contact-icon"><svg viewBox="0 0 20 20" fill="none"><circle cx="8" cy="8" r="5" stroke="#9E1B32" stroke-width="1.5" fill="none"/><line x1="12" y1="12" x2="17" y2="17" stroke="#9E1B32" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div><div class="contact-label">ResearchGate</div><div class="contact-val">researchgate.net/Idowu-Awoyemi-2</div></div>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon"><svg viewBox="0 0 20 20" fill="none"><rect x="3" y="2" width="14" height="16" rx="2" stroke="#9E1B32" stroke-width="1.5" fill="none"/><line x1="7" y1="7" x2="13" y2="7" stroke="#9E1B32" stroke-width="1.2"/><line x1="7" y1="10" x2="13" y2="10" stroke="#9E1B32" stroke-width="1.2"/><line x1="7" y1="13" x2="10" y2="13" stroke="#9E1B32" stroke-width="1.2"/></svg></div>
+      <div><div class="contact-label">Phone</div><div class="contact-val">(659) 228-4351</div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  &copy; <span id="yr"></span> <span>Idowu David Awoyemi</span> &nbsp;·&nbsp; University of Alabama &nbsp;·&nbsp; Built with GitHub Pag
